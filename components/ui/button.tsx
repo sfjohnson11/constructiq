@@ -1,36 +1,39 @@
-// File: components/ui/button.tsx
-import * as React from "react"
+// components/ui/button.tsx
 import { cn } from "@/lib/utils"
+import { forwardRef } from "react"
+import type { ButtonHTMLAttributes } from "react"
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "outline" | "ghost" | "link"
-  size?: "default" | "sm" | "lg"
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "default" | "destructive" | "outline"
+  size?: "sm" | "md" | "lg"
 }
 
-const buttonVariants = {
+const baseStyles =
+  "inline-flex items-center justify-center font-medium rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none"
+
+const variantStyles = {
   default: "bg-yellow-400 text-black hover:bg-yellow-300",
-  outline: "border border-yellow-400 text-yellow-400 bg-transparent hover:bg-yellow-400 hover:text-black",
-  ghost: "bg-transparent hover:bg-slate-800 text-white",
-  link: "underline text-yellow-300 hover:text-yellow-200",
+  destructive: "bg-red-600 text-white hover:bg-red-500",
+  outline: "border border-white text-white hover:bg-white hover:text-black"
 }
 
-const buttonSizes = {
-  default: "px-6 py-3 text-base rounded-xl",
-  sm: "px-4 py-2 text-sm rounded-lg",
-  lg: "px-8 py-4 text-lg rounded-2xl",
+const sizeStyles = {
+  sm: "px-3 py-1 text-sm",
+  md: "px-4 py-2 text-base",
+  lg: "px-6 py-3 text-lg"
 }
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", size = "default", ...props }, ref) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = "default", size = "md", ...props }, ref) => {
     return (
       <button
+        ref={ref}
         className={cn(
-          "font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-yellow-300",
-          buttonVariants[variant],
-          buttonSizes[size],
+          baseStyles,
+          variantStyles[variant],
+          sizeStyles[size],
           className
         )}
-        ref={ref}
         {...props}
       />
     )
