@@ -42,14 +42,35 @@ export default function StudyPlanSetPage() {
     if (planSetId) fetchContent()
   }, [planSetId])
 
-  const handleSubmit = () => {
-    let correct = 0
-    questions.forEach((q) => {
-      if (answers[q.id] === q.correct_answer) correct++
-    })
-    setScore(correct)
-    setSubmitted(true)
+  const handleSubmit = async () => {
+  let correct = 0
+  questions.forEach((q) => {
+    if (answers[q.id] === q.correct_answer) correct++
+  })
+  setScore(correct)
+  setSubmitted(true)
+
+  const {
+    data: { user },
+    error: userError
+  } = await supabase.auth.getUser()
+  if (userError || !user) return
+
+  const { error } = await supabase.from("electrical_quiz_results").insert([
+    {
+      quiz_id: questions[0]?.id, // assumes all questions belong to one quiz
+      student_id: user.id,
+      score: correct,
+    },
+  ])
+
+  if (error) {
+    console.error("❌ Failed to save quiz result:", error)
+  } else {
+    console.log("✅ Quiz result saved")
   }
+}
+
 
   return (
     <main className="min-h-screen bg-slate-950 text-white py-12 px-6">
