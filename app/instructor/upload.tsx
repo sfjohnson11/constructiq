@@ -1,20 +1,66 @@
-// app/instructor/upload.tsx
+// File: app/instructor/upload.tsx
 "use client"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Upload, FileText } from "lucide-react"
+import { Upload } from "lucide-react"
+import supabase from "@/lib/supabaseClient"
+import { v4 as uuidv4 } from "uuid"
 
 export default function UploadPlansPage() {
   const [file, setFile] = useState<File | null>(null)
   const [trade, setTrade] = useState("")
   const [label, setLabel] = useState("")
   const [notes, setNotes] = useState("")
+  const [uploading, setUploading] = useState(false)
+  const [message, setMessage] = useState("")
 
-  const handleUpload = () => {
-    // Later: Upload to Supabase storage + save metadata
-    console.log({ file, trade, label, notes })
-    alert("Upload simulated. Integrate Supabase next.")
+  const handleUpload = async () => {
+    if (!file || !trade || !label) {
+      alert("Please fill out all required fields.")
+      return
+    }
+
+    setUploading(true)
+    const filename = `${uuidv4()}_${file.name}`
+
+    // 1. Upload to Supabase Storage
+    const { data: fileData, error: fileError } = await supabase.storage
+      .from("plans")
+      .upload(filename, file)
+
+    if (fileError) {
+      setMessage("Upload failed.")
+      console.error(fileError)
+      setUploading(false)
+      return
+    }
+
+    const fileUrl = supabase.storage.from("plans").getPublicUrl(filename).data.publicUrl
+
+    // 2. Save metadata to 'plans' table
+    const { error: dbError } = await supabase.from("plans").insert([
+      {
+        trade,
+        label,
+        notes,
+        file_url: fileUrl,
+        filename,
+      }
+    ])
+
+    if (dbError) {
+      setMessage("Database save failed.")
+      console.error(dbError)
+    } else {
+      setMessage("✅ Plan uploaded successfully.")
+      setFile(null)
+      setTrade("")
+      setLabel("")
+      setNotes("")
+    }
+
+    setUploading(false)
   }
 
   return (
@@ -70,9 +116,15 @@ export default function UploadPlansPage() {
           />
         </div>
 
-        <Button onClick={handleUpload} className="bg-yellow-400 text-black text-lg px-6 py-3 rounded-xl shadow-md hover:scale-105 flex gap-2 items-center">
-          <Upload size={18} /> Upload Plan
+        <Button
+          onClick={handleUpload}
+          disabled={uploading}
+          className="bg-yellow-400 text-black text-lg px-6 py-3 rounded-xl shadow-md hover:scale-105 flex gap-2 items-center"
+        >
+          <Upload size={18} /> {uploading ? "Uploading..." : "Upload Plan"}
         </Button>
+
+        {message && <p className="text-green-400 font-semibold">{message}</p>}
       </div>
     </main>
   )
