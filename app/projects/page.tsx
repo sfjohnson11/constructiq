@@ -3,9 +3,9 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
+import { Button } from "../../components/ui/button"
 import Link from "next/link"
-import supabase from "@/lib/supabaseClient"
+import supabase from "../../lib/supabaseClient"
 
 interface Project {
   id: string
