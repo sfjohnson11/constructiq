@@ -1,7 +1,13 @@
+// next.config.js
+const path = require("path");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true
-  // You can add more Next.js config options here if needed in the future.
+  webpack: (config) => {
+    config.resolve.alias["@"] = path.resolve(__dirname);
+    return config;
+  },
 };
 
 module.exports = nextConfig;
+
