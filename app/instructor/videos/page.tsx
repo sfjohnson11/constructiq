@@ -2,8 +2,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import supabase from "@/lib/supabaseClient"
+import { Button } from "../../../components/ui/button"
+import supabase from "../../../lib/supabaseClient"
 import { Upload } from "lucide-react"
 import { v4 as uuidv4 } from "uuid"
 
