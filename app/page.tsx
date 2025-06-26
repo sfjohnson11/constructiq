@@ -1,7 +1,8 @@
 // File: app/page.tsx
+
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-950 to-blue-900 text-white flex flex-col justify-center items-center px-6 py-16">
+    <main className="min-h-screen bg-gradient-to-br from-blue-950 to-blue-900 text-white flex flex-col justify-center items-center px-6 py-16 relative">
       <div className="text-center max-w-3xl">
         <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-400 mb-6 drop-shadow-lg">
           E-Deck ConstructIQ
@@ -16,7 +17,7 @@ export default function HomePage() {
           All-Trades Estimating & Instruction Platform from<br />
           <span className="font-semibold">S F Johnson Enterprises, LLC</span>
         </p>
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-4 mb-6">
           <a
             href="/student"
             className="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-xl shadow hover:bg-yellow-300 transition"
@@ -32,7 +33,18 @@ export default function HomePage() {
             Learn More
           </a>
         </div>
+
+        {/* 🧑‍🏫 Instructor Login button */}
+        <div className="mt-4">
+          <a
+            href="/admin/login"
+            className="text-sm underline text-blue-300 hover:text-yellow-400 transition"
+          >
+            Instructor Login
+          </a>
+        </div>
       </div>
+
       <footer className="absolute bottom-4 text-sm text-blue-300">
         © 2025 S F Johnson Enterprises, LLC. All rights reserved.
       </footer>
