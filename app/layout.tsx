@@ -5,7 +5,8 @@ import { useEffect, useState } from "react"
 import { createClient } from "@/utils/supabase/client"
 
 export default function HomePage() {
-  const [user, setUser] = useState(null)
+  import { User } from "@supabase/supabase-js" // Ensure this import is near the top if it's not already
+const [user, setUser] = useState<User | null>(null)
   const supabase = createClient()
 
   useEffect(() => {
