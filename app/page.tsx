@@ -2,52 +2,45 @@
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-950 to-blue-900 text-white flex flex-col justify-center items-center px-6 py-16 relative">
-      <div className="text-center max-w-3xl">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-400 mb-6 drop-shadow-lg">
+    <main className="min-h-screen bg-gradient-to-br from-[#0a0a23] to-[#001F3F] text-white flex items-center justify-center px-6">
+      <section className="w-full max-w-5xl text-center py-20">
+        <h1 className="text-6xl font-black mb-4 text-yellow-400 drop-shadow-xl tracking-tight">
           E-Deck ConstructIQ
         </h1>
-        <h2 className="text-xl md:text-2xl font-medium text-blue-200 mb-4">
-          Student Portal
-        </h2>
-        <p className="text-lg md:text-xl text-blue-100 mb-6">
-          Estimate. Learn. Build.
+        <p className="text-xl text-slate-300 mb-2 font-semibold">
+          All-Trades Estimating & Instruction Platform
         </p>
-        <p className="text-sm md:text-base text-slate-300 mb-10">
-          All-Trades Estimating & Instruction Platform from<br />
-          <span className="font-semibold">S F Johnson Enterprises, LLC</span>
+        <p className="text-md text-slate-400 mb-8">
+          Built by S F Johnson Enterprises, LLC – Train. Estimate. Win Bids.
         </p>
-        <div className="flex justify-center gap-4 mb-6">
+
+        <div className="flex flex-wrap justify-center gap-6 mb-12">
           <a
             href="/student"
-            className="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-xl shadow hover:bg-yellow-300 transition"
+            className="bg-yellow-400 text-black text-lg px-6 py-3 rounded-xl font-bold shadow-lg hover:bg-yellow-300 transition"
           >
-            Begin
+            Student Portal
+          </a>
+          <a
+            href="/admin/login"
+            className="bg-transparent border border-yellow-400 text-yellow-400 text-lg px-6 py-3 rounded-xl font-bold hover:bg-yellow-400 hover:text-black transition"
+          >
+            Instructor Login
           </a>
           <a
             href="https://www.sfjohnsonconsulting.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-yellow-400 text-yellow-400 font-semibold px-6 py-3 rounded-xl hover:bg-yellow-400 hover:text-black transition"
+            className="text-sm text-slate-400 underline mt-2 hover:text-yellow-300"
           >
-            Learn More
+            Learn more at sfjohnsonconsulting.com
           </a>
         </div>
 
-        {/* 🧑‍🏫 Instructor Login button */}
-        <div className="mt-4">
-          <a
-            href="/admin/login"
-            className="text-sm underline text-blue-300 hover:text-yellow-400 transition"
-          >
-            Instructor Login
-          </a>
-        </div>
-      </div>
-
-      <footer className="absolute bottom-4 text-sm text-blue-300">
-        © 2025 S F Johnson Enterprises, LLC. All rights reserved.
-      </footer>
+        <footer className="text-sm text-slate-500">
+          © 2025 S F Johnson Enterprises, LLC. All rights reserved.
+        </footer>
+      </section>
     </main>
   );
 }
