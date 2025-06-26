@@ -1,7 +1,10 @@
+"use client"
+
 import { useState, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import supabase from '@/lib/supabaseClient'
+
 
 export default function AdminLoginPage() {
   const router = useRouter()
