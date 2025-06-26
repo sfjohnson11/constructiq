@@ -1,42 +1,41 @@
 // File: app/page.tsx
-
 export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-blue-900 to-blue-700 text-white">
-      {/* Header */}
-      <header className="text-center py-16 px-4">
-        <h1 className="text-5xl font-extrabold text-yellow-400 mb-4 drop-shadow-xl">
+    <main className="min-h-screen bg-gradient-to-br from-blue-950 to-blue-900 text-white flex flex-col justify-center items-center px-6 py-16">
+      <div className="text-center max-w-3xl">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-yellow-400 mb-6 drop-shadow-lg">
           E-Deck ConstructIQ
         </h1>
-        <p className="text-lg italic text-blue-100 mb-2">
-          All-Trades Estimating & Instruction Platform
+        <h2 className="text-xl md:text-2xl font-medium text-blue-200 mb-4">
+          Student Portal
+        </h2>
+        <p className="text-lg md:text-xl text-blue-100 mb-6">
+          Estimate. Learn. Build.
         </p>
-        <p className="text-md text-blue-200">
-          From S F Johnson Enterprises, LLC
+        <p className="text-sm md:text-base text-slate-300 mb-10">
+          All-Trades Estimating & Instruction Platform from<br />
+          <span className="font-semibold">S F Johnson Enterprises, LLC</span>
         </p>
-      </header>
-
-      {/* CTA Buttons */}
-      <div className="flex flex-col items-center gap-6 px-4">
-        <a
-          href="/student/login"
-          className="bg-yellow-400 text-black px-8 py-4 rounded-xl text-xl font-semibold shadow hover:bg-yellow-300 transition"
-        >
-          Begin
-        </a>
-        <a
-          href="https://www.sfjohnsonconsulting.com"
-          target="_blank"
-          className="underline text-blue-200 hover:text-white"
-        >
-          Learn More
-        </a>
+        <div className="flex justify-center gap-4">
+          <a
+            href="/student"
+            className="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-xl shadow hover:bg-yellow-300 transition"
+          >
+            Begin
+          </a>
+          <a
+            href="https://www.sfjohnsonconsulting.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-yellow-400 text-yellow-400 font-semibold px-6 py-3 rounded-xl hover:bg-yellow-400 hover:text-black transition"
+          >
+            Learn More
+          </a>
+        </div>
       </div>
-
-      {/* Footer */}
-      <footer className="text-center py-6 text-sm text-blue-200 mt-12">
+      <footer className="absolute bottom-4 text-sm text-blue-300">
         © 2025 S F Johnson Enterprises, LLC. All rights reserved.
       </footer>
-    </div>
-  )
+    </main>
+  );
 }
