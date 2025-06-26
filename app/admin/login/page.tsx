@@ -33,21 +33,23 @@ export default function AdminLoginPage() {
       <form onSubmit={handleLogin} className="bg-white text-black p-6 rounded shadow-md w-full max-w-sm">
         <h1 className="text-2xl font-bold mb-4">Admin Login</h1>
 
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="mb-4"
-        />
+        <div className="mb-4">
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-        <Input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="mb-4"
-        />
+        <div className="mb-4">
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
         {error && <p className="text-red-600 mb-2">{error}</p>}
 
