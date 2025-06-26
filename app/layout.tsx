@@ -1,19 +1,26 @@
-export const metadata = {
-  title: "ConstructIQ",
-  description: "ConstructIQ – Modern Construction Project Intelligence"
-};
+import "./globals.css"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import NavBar from "@/components/NavBar"
+
+const inter = Inter({ subsets: ["latin"] })
+
+export const metadata: Metadata = {
+  title: "E-Deck ConstructIQ",
+  description: "Professional estimating and quiz system",
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
-      {/* The global Tailwind CSS styles are imported in globals.css */}
-      <body className="min-h-screen font-sans antialiased">
+      <body className={inter.className}>
+        <NavBar />
         {children}
       </body>
     </html>
-  );
+  )
 }
