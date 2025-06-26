@@ -1,8 +1,5 @@
-"use client"
-
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import supabase from '@/lib/supabaseClient'
 
@@ -10,12 +7,9 @@ export default function AdminLoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState('')
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-
+  const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -29,34 +23,33 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-900 text-white">
-      <form onSubmit={handleLogin} className="bg-white text-black p-6 rounded shadow-md w-full max-w-sm">
-        <h1 className="text-2xl font-bold mb-4">Admin Login</h1>
+    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">Admin Login</h1>
 
-        <div className="mb-4">
-          <Input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4"
+        />
 
-        <div className="mb-4">
-          <Input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded-md mb-4"
+        />
 
-        {error && <p className="text-red-600 mb-2">{error}</p>}
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
-        <Button type="submit" className="w-full bg-blue-700 hover:bg-blue-800 text-white">
+        <Button className="w-full" onClick={handleLogin}>
           Login
         </Button>
-      </form>
+      </div>
     </div>
   )
 }
+
