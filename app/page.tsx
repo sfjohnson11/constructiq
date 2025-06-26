@@ -5,30 +5,36 @@ import Link from "next/link"
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-950 to-slate-900 text-yellow-100 px-6">
-      <div className="flex flex-col items-center justify-center min-h-screen text-center space-y-8">
-        <h1 className="text-6xl sm:text-7xl font-extrabold text-yellow-400 leading-tight">
-          E-Deck ConstructIQ
-        </h1>
+    <main className="min-h-screen bg-gradient-to-br from-blue-950 via-blue-900 to-slate-950 text-white">
+      {/* Navbar */}
+      <header className="w-full bg-blue-950 shadow-lg border-b border-yellow-500">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-yellow-400 tracking-wide">
+            E-Deck ConstructIQ
+          </h1>
+          <nav className="space-x-6 text-sm sm:text-base">
+            <Link href="/" className="hover:text-yellow-300 transition">Home</Link>
+            <Link href="/projects" className="hover:text-yellow-300 transition">Projects</Link>
+            <Link href="/student/video-quiz?quizId=demo" className="hover:text-yellow-300 transition">Quiz</Link>
+            <a
+              href="https://www.sfjohnsonconsulting.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-yellow-300 transition"
+            >
+              Support
+            </a>
+          </nav>
+        </div>
+      </header>
 
-        <p className="text-lg sm:text-xl text-blue-200 max-w-2xl mx-auto">
-          A cutting-edge trade estimating and training platform built by{" "}
-          <span className="text-yellow-300 font-semibold">
-            S F Johnson Enterprises, LLC
-          </span>
-        </p>
+      {/* Hero Section */}
+      <section className="flex items-center justify-center px-6 py-24 text-center">
+        <div className="max-w-3xl space-y-8">
+          <h2 className="text-5xl sm:text-6xl font-extrabold text-yellow-400 leading-tight drop-shadow-lg">
+            Estimate. Learn. Build.
+          </h2>
 
-        <p className="text-base sm:text-lg text-blue-200 max-w-2xl mx-auto">
-          Empowering contractors and students to master plan reading, estimation, and project success — across all trades.
-        </p>
-
-        <Link
-          href="/student/video-quiz?quizId=demo"
-          className="mt-6 inline-block bg-yellow-400 hover:bg-yellow-300 text-black text-lg font-semibold px-12 py-4 rounded-full shadow-xl transition"
-        >
-          🚀 Begin Now
-        </Link>
-      </div>
-    </main>
-  )
-}
+          <p className="text-lg sm:text-xl text-blue-100">
+            Powered by <span className="font-semibold text-yellow-300">S F Johnson Enterprises, LLC</span>
+          </p>
