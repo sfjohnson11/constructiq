@@ -1,17 +1,15 @@
-// File: app/page.tsx
-
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#0a0a23] to-[#001F3F] text-white flex items-center justify-center px-6">
-      <section className="w-full max-w-5xl text-center py-20">
-        <h1 className="text-6xl font-black mb-4 text-yellow-400 drop-shadow-xl tracking-tight">
+    <main className="min-h-screen bg-gradient-to-br from-[#0a0a23] to-[#001F3F] text-white flex flex-col items-center justify-center px-6 py-16">
+      <div className="text-center max-w-3xl w-full">
+        <h1 className="text-5xl md:text-6xl font-black mb-6 text-yellow-400 drop-shadow-xl tracking-tight">
           E-Deck ConstructIQ
         </h1>
-        <p className="text-xl text-slate-300 mb-2 font-semibold">
+        <p className="text-xl text-slate-300 font-semibold mb-2">
           All-Trades Estimating & Instruction Platform
         </p>
-        <p className="text-md text-slate-400 mb-8">
-          Built by S F Johnson Enterprises, LLC – Train. Estimate. Win Bids.
+        <p className="text-md text-slate-400 mb-10">
+          Built by S F Johnson Enterprises, LLC – <span className="italic">Train. Estimate. Win Bids.</span>
         </p>
 
         <div className="flex flex-wrap justify-center gap-6 mb-12">
@@ -27,20 +25,21 @@ export default function HomePage() {
           >
             Instructor Login
           </a>
-          <a
-            href="https://www.sfjohnsonconsulting.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-slate-400 underline mt-2 hover:text-yellow-300"
-          >
-            Learn more at sfjohnsonconsulting.com
-          </a>
         </div>
 
-        <footer className="text-sm text-slate-500">
-          © 2025 S F Johnson Enterprises, LLC. All rights reserved.
-        </footer>
-      </section>
+        <a
+          href="https://www.sfjohnsonconsulting.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-slate-400 underline hover:text-yellow-300 transition"
+        >
+          Learn more at sfjohnsonconsulting.com
+        </a>
+      </div>
+
+      <footer className="absolute bottom-4 text-sm text-slate-500">
+        © 2025 S F Johnson Enterprises, LLC. All rights reserved.
+      </footer>
     </main>
   );
 }
