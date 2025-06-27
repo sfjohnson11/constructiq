@@ -9,7 +9,7 @@ type Project = {
   name: string
 }
 
-export default function VideosPage() {
+export default function InstructorVideosPage() {
   const [projects, setProjects] = useState<Project[]>([])
 
   useEffect(() => {
@@ -29,15 +29,28 @@ export default function VideosPage() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white p-6">
-      <h1 className="text-2xl font-bold text-yellow-400 mb-4">🎥 Project Videos</h1>
-      <ul className="space-y-2">
-        {projects.map((project) => (
-          <li key={project.id} className="bg-slate-800 p-3 rounded-xl">
-            {project.name}
-          </li>
-        ))}
-      </ul>
+    <main className="min-h-screen bg-gradient-to-br from-blue-950 to-slate-950 text-white py-12 px-6">
+      <div className="max-w-4xl mx-auto space-y-8">
+        <header className="text-center">
+          <h1 className="text-4xl font-extrabold text-yellow-400">
+            🎥 Project Videos
+          </h1>
+          <p className="text-blue-200 italic">
+            E-Deck ConstructIQ by S F Johnson Enterprises, LLC
+          </p>
+        </header>
+
+        <ul className="space-y-4">
+          {projects.map((project) => (
+            <li
+              key={project.id}
+              className="bg-blue-800 bg-opacity-30 border border-yellow-500 rounded-xl p-4 hover:shadow-yellow-400 shadow-md transition"
+            >
+              <p className="text-lg font-semibold text-yellow-300">{project.name}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </main>
   )
 }
