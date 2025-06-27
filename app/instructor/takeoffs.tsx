@@ -1,11 +1,9 @@
-// File: app/instructor/takeoffs.tsx
-"use client"
-
 "use client"
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input" // ✅ This is the missing import
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import supabase from "@/lib/supabaseClient"
 import { v4 as uuidv4 } from "uuid"
 
@@ -49,19 +47,17 @@ export default function TakeoffCreator() {
       return
     }
 
-    const { error } = await supabase.from("electrical_takeoff_items").insert([
-      {
-        project_id: selectedProject,
-        plan_set_id: selectedPlanSet,
-        item_label: itemLabel,
-        description,
-        location,
-        unit,
-        quantity: parseFloat(quantity),
-        labor_hours: parseFloat(laborHours),
-        material_cost: parseFloat(materialCost),
-      },
-    ])
+    const { error } = await supabase.from("electrical_takeoff_items").insert([{
+      project_id: selectedProject,
+      plan_set_id: selectedPlanSet,
+      item_label: itemLabel,
+      description,
+      location,
+      unit,
+      quantity: parseFloat(quantity),
+      labor_hours: parseFloat(laborHours),
+      material_cost: parseFloat(materialCost),
+    }])
 
     if (error) {
       setMessage("❌ Error saving takeoff item.")
@@ -111,13 +107,28 @@ export default function TakeoffCreator() {
           </select>
         </div>
 
-        <Input label="Item Label" value={itemLabel} onChange={(e) => setItemLabel(e.target.value)} placeholder="e.g., Branch Circuit A1" />
-        <Input label="Description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Full scope description" />
-        <Input label="Location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Optional area or room" />
-        <Input label="Unit" value={unit} onChange={(e) => setUnit(e.target.value)} placeholder="e.g., EA, LF, FT" />
-        <Input label="Quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} placeholder="Enter numeric quantity" type="number" />
-        <Input label="Labor Hours" value={laborHours} onChange={(e) => setLaborHours(e.target.value)} placeholder="Enter labor hours" type="number" />
-        <Input label="Material Cost" value={materialCost} onChange={(e) => setMaterialCost(e.target.value)} placeholder="Enter cost" type="number" />
+        <div className="space-y-3">
+          <Label htmlFor="itemLabel">Item Label</Label>
+          <Input id="itemLabel" value={itemLabel} onChange={(e) => setItemLabel(e.target.value)} placeholder="e.g., Branch Circuit A1" />
+
+          <Label htmlFor="description">Description</Label>
+          <Input id="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Full scope description" />
+
+          <Label htmlFor="location">Location</Label>
+          <Input id="location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Optional area or room" />
+
+          <Label htmlFor="unit">Unit</Label>
+          <Input id="unit" value={unit} onChange={(e) => setUnit(e.target.value)} placeholder="e.g., EA, LF, FT" />
+
+          <Label htmlFor="quantity">Quantity</Label>
+          <Input id="quantity" type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} placeholder="Enter numeric quantity" />
+
+          <Label htmlFor="laborHours">Labor Hours</Label>
+          <Input id="laborHours" type="number" value={laborHours} onChange={(e) => setLaborHours(e.target.value)} placeholder="Enter labor hours" />
+
+          <Label htmlFor="materialCost">Material Cost</Label>
+          <Input id="materialCost" type="number" value={materialCost} onChange={(e) => setMaterialCost(e.target.value)} placeholder="Enter cost" />
+        </div>
 
         <Button onClick={handleSubmit} className="bg-yellow-400 text-black px-6 py-3 rounded-xl hover:scale-105">Save Takeoff</Button>
 
