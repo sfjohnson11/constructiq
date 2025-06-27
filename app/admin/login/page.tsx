@@ -35,20 +35,28 @@ export default function AdminLoginPage() {
         <h1 className="text-4xl font-extrabold text-yellow-400 mb-6">Instructor Login</h1>
 
         <div className="space-y-4">
-          <Input
-            label="Email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input
-            label="Password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <Label htmlFor="email">Email</Label>
+<Input
+  id="email"
+  type="email"
+  placeholder="Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  className="pl-10 h-12"
+  required
+/>
+
+          <Label htmlFor="email">Email</Label>
+<Input
+  id="email"
+  type="email"
+  placeholder="Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  className="pl-10 h-12"
+  required
+/>
+
         </div>
 
         {error && <p className="text-red-400 text-sm mt-4">{error}</p>}
