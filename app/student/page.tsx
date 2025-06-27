@@ -1,75 +1,67 @@
-// File: app/student/page.tsx
-"use client"
+// Page: app/student/page.tsx
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import supabase from "@/lib/supabaseClient"
+"use client";
 
-interface UserData {
-  id: string
-  role?: string
-}
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import supabase from "@/lib/supabaseClient";
 
-export default function StudentDashboardPage() {
-  const [userData, setUserData] = useState<UserData | null>(null)
+export default function StudentLoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchUser() {
-      const { data: sessionData } = await supabase.auth.getUser()
-      const userId = sessionData?.user?.id
+  const handleLogin = async () => {
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-      if (!userId) return
-
-      const { data, error } = await supabase
-        .from("users")
-        .select("id, role")
-        .eq("id", userId)
-        .single()
-
-      if (!error && data) {
-        setUserData(data)
-      }
+    if (error) {
+      setError("Login failed. Please check your credentials.");
+      setLoading(false);
+    } else {
+      setError("");
+      router.push("/student/dashboard");
     }
-
-    fetchUser()
-  }, [])
+  };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-950 to-slate-950 text-white px-6 py-12">
-      <div className="max-w-5xl mx-auto">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-yellow-400 drop-shadow">
-            Welcome to E-Deck ConstructIQ
-          </h1>
-          <p className="text-blue-200 mt-2 italic">
-            by S F Johnson Enterprises, LLC
-          </p>
-        </header>
+    <main className="min-h-screen bg-gradient-to-br from-[#0a0a23] to-[#001F3F] text-white flex items-center justify-center px-6">
+      <section className="bg-blue-800 p-10 rounded-2xl shadow-2xl w-full max-w-md text-center">
+        <h1 className="text-4xl font-extrabold text-yellow-400 mb-6">Student Portal</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Link
-            href="/student/video-quiz"
-            className="bg-blue-800 hover:bg-blue-700 rounded-xl p-6 shadow-lg border border-yellow-400 transition"
-          >
-            <h2 className="text-xl font-bold text-yellow-300 mb-2">📺 Watch & Take Quiz</h2>
-            <p className="text-blue-100">
-              Start an assigned video lesson and complete the quiz to test your knowledge.
-            </p>
-          </Link>
-
-          {userData?.role === "teacher" && (
-            <Link
-              href="/teacher/create-quiz"
-              className="bg-blue-800 hover:bg-blue-700 rounded-xl p-6 shadow-lg border border-yellow-400 transition"
-            >
-              <h2 className="text-xl font-bold text-yellow-300 mb-2">🛠️ Create New Quiz</h2>
-              <p className="text-blue-100">
-                Upload a video and add quiz questions for your students to complete.
-              </p>
-            </Link>
-          )}
+        <div className="space-y-4">
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-      </div>
+
+        {error && <p className="text-red-400 text-sm mt-4">{error}</p>}
+
+        <Button
+          onClick={handleLogin}
+          disabled={loading}
+          className="w-full mt-6 font-bold"
+        >
+          {loading ? "Logging in..." : "Login"}
+        </Button>
+
+        <p className="text-xs text-slate-400 mt-6">
+          © 2025 S F Johnson Enterprises, LLC
+        </p>
+      </section>
     </main>
-  )
+  );
 }
