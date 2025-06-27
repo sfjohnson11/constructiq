@@ -4,6 +4,11 @@ import { Inter } from "next/font/google"
 
 const inter = Inter({ subsets: ["latin"] })
 
+export const metadata = {
+  title: "E-Deck ConstructIQ",
+  description: "All-Trades Estimating & Instruction Platform by SF Johnson Enterprises, LLC",
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -11,12 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} bg-gradient-to-br from-blue-950 to-blue-900 text-white min-h-screen flex items-center justify-center`}
-      >
-        <div className="w-full max-w-screen-xl px-6">{children}</div>
+      <body className={`${inter.className} bg-gradient-to-br from-[#0a0a23] to-[#001F3F] text-white min-h-screen`}>
+        {children}
       </body>
     </html>
   )
 }
-
