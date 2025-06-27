@@ -1,4 +1,3 @@
-// File: app/instructor/create-quiz/page.tsx
 "use client"
 
 import { useEffect, useState } from "react"
@@ -18,7 +17,7 @@ export default function CreateQuizPage() {
 
   useEffect(() => {
     async function fetchPlanSets() {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("electrical_plan_sets")
         .select("id, name")
         .order("created_at", { ascending: false })
@@ -48,10 +47,9 @@ export default function CreateQuizPage() {
 
     if (error) {
       toast({
-        toast({
-  title: "Quiz Creation Failed",
-  description: "Something went wrong while saving your quiz. Please try again.",
-})
+        title: "Quiz Creation Failed",
+        description: "Something went wrong while saving your quiz. Please try again.",
+      })
       return
     }
 
@@ -106,3 +104,5 @@ export default function CreateQuizPage() {
     </main>
   )
 }
+
+      
