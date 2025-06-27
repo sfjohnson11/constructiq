@@ -1,5 +1,3 @@
-// Page: app/admin/login/page.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -17,7 +15,10 @@ export default function AdminLoginPage() {
 
   const handleLogin = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
     if (error) {
       setError("Login failed. Please check your credentials.");
@@ -35,12 +36,14 @@ export default function AdminLoginPage() {
 
         <div className="space-y-4">
           <Input
+            label="Email"
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <Input
+            label="Password"
             type="password"
             placeholder="Password"
             value={password}
@@ -65,3 +68,4 @@ export default function AdminLoginPage() {
     </main>
   );
 }
+
