@@ -37,7 +37,7 @@ export default function StudyLibraryPage() {
       <div className="max-w-6xl mx-auto space-y-12">
         <header className="text-center">
           <h1 className="text-4xl font-extrabold text-yellow-400">
-            📚 Study Library
+            📚 Study Library (Student)
           </h1>
           <p className="text-blue-200 italic mt-2">
             E-Deck ConstructIQ by S F Johnson Enterprises, LLC
