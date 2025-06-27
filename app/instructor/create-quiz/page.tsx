@@ -52,7 +52,6 @@ export default function CreateQuizPage() {
   title: "Quiz Creation Failed",
   description: "Something went wrong while saving your quiz. Please try again.",
 })
-      })
       return
     }
 
