@@ -48,9 +48,10 @@ export default function CreateQuizPage() {
 
     if (error) {
       toast({
-        title: "Quiz Creation Failed",
-        description: "Something went wrong while saving your quiz. Please try again.",
-        variant: "destructive",
+        toast({
+  title: "Quiz Creation Failed",
+  description: "Something went wrong while saving your quiz. Please try again.",
+})
       })
       return
     }
