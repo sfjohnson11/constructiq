@@ -1,43 +1,43 @@
 // File: app/student/study-library/page.tsx
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import supabase from "@/lib/supabaseClient"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import supabase from "@/lib/supabaseClient";
 
 interface StudyVideo {
-  id: string
-  title: string
-  file_url: string
-  quiz_id: string
+  id: string;
+  title: string;
+  file_url: string;
+  quiz_id: string;
 }
 
 export default function StudyLibraryPage() {
-  const [videos, setVideos] = useState<StudyVideo[]>([])
-  const router = useRouter()
+  const [videos, setVideos] = useState<StudyVideo[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchVideos = async () => {
       const { data, error } = await supabase
         .from("electrical_plan_sets")
-        .select("id, title, file_url, quiz_id")
+        .select("id, title, file_url, quiz_id");
 
       if (error) {
-        console.error("Error loading videos:", error)
+        console.error("Error loading videos:", error);
       } else {
-        setVideos(data || [])
+        setVideos(data || []);
       }
-    }
+    };
 
-    fetchVideos()
-  }, [])
+    fetchVideos();
+  }, []);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-900 to-slate-950 text-white px-6 py-12">
       <div className="max-w-6xl mx-auto space-y-12">
         <header className="text-center">
           <h1 className="text-4xl font-extrabold text-yellow-400">
-            📚 Study Library (Student)
+            📚 Study Library
           </h1>
           <p className="text-blue-200 italic mt-2">
             E-Deck ConstructIQ by S F Johnson Enterprises, LLC
@@ -70,5 +70,5 @@ export default function StudyLibraryPage() {
         </div>
       </div>
     </main>
-  )
+  );
 }
