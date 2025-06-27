@@ -5,9 +5,12 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import supabase from "@/lib/supabaseClient"
 import { Button } from "@/components/ui/button"
+import { useToast } from "@/components/ui/use-toast"
 
 export default function CreateQuizPage() {
   const router = useRouter()
+  const { toast } = useToast()
+
   const [title, setTitle] = useState("")
   const [planSets, setPlanSets] = useState<{ id: string; name: string }[]>([])
   const [selectedPlanSet, setSelectedPlanSet] = useState("")
@@ -15,7 +18,7 @@ export default function CreateQuizPage() {
 
   useEffect(() => {
     async function fetchPlanSets() {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("electrical_plan_sets")
         .select("id, name")
         .order("created_at", { ascending: false })
@@ -44,7 +47,11 @@ export default function CreateQuizPage() {
     setSaving(false)
 
     if (error) {
-      alert("Failed to create quiz.")
+      toast({
+        title: "Quiz Creation Failed",
+        description: "Something went wrong while saving your quiz. Please try again.",
+        variant: "destructive",
+      })
       return
     }
 
